@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout – Adidas Samba</title>
+  <style>
+    :root{
+      --bg:#f9f9f9; --fg:#333; --card:#fff; --muted:#666; --brand:#000; --ok:#0a0;
+      --radius:10px; --radius-sm:6px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--fg);
+    }
+    .container{
+      max-width:1200px; margin:auto; padding:20px;
+      display:grid; grid-template-columns: 2fr 1fr; gap:20px;
+    }
+    .card{
+      background:var(--card); border-radius:var(--radius); padding:20px;
+      box-shadow:0 1px 2px rgba(0,0,0,.04);
+    }
+    h1{font-size:2rem; margin:0 0 10px}
+    h2{font-size:1.2rem; margin:0 0 12px}
+    .section{margin-bottom:18px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    label{display:block; font-size:.9rem; margin-bottom:6px}
+    input, select, textarea{
+      width:100%; padding:10px; border:1px solid #ddd; border-radius:var(--radius-sm); font-size:1rem; background:#fff;
+    }
+    .inline{display:flex; gap:12px; align-items:center}
+    .radio{
+      display:flex; align-items:center; gap:8px; padding:10px; border:1px solid #ddd; border-radius:var(--radius-sm); cursor:pointer;
+    }
+    .radio input{margin:0}
+    .muted{color:var(--muted); font-size:.9rem}
+    .actions{display:flex; gap:12px; align-items:center; margin-top:10px}
+    .btn{
+      background:var(--brand); color:#fff; border:none; padding:14px 18px; border-radius:var(--radius-sm);
+      font-size:1rem; cursor:pointer; width:100%;
+    }
+    .btn.secondary{background:#333}
+    .btn:disabled{opacity:.6; cursor:not-allowed}
+    .summary-item, .total-item{
+      display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed #eee;
+    }
+    .summary-item:last-child{border-bottom:none}
+    .total{
+      margin-top:10px; border-top:1px solid #eee; padding-top:10px;
+    }
+    .total-item{font-weight:bold}
+    .product{
+      display:flex; gap:12px; align-items:center; border-bottom:1px solid #eee; padding-bottom:12px; margin-bottom:12px;
+    }
+    .product img{
+      width:70px; height:70px; object-fit:cover; border-radius:8px; border:1px solid #eee;
+    }
+    .code{
+      display:flex; gap:8px; margin-top:8px;
+    }
+    .tag{font-size:.8rem; padding:4px 8px; border:1px solid #ddd; border-radius:999px}
+    .divider{height:1px; background:#eee; margin:14px 0}
+    .notice{background:#f3f3f3; border:1px solid #e7e7e7; border-radius:8px; padding:10px; font-size:.9rem}
+    @media (max-width: 920px){
+      .container{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- COLONNA SINISTRA -->
+    <div class="card">
+      <h1>Checkout</h1>
+      <div class="section">
+        <h2>Contatti</h2>
+        <div class="row">
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="nome@azienda.it" required>
+          </div>
+          <div>
+            <label for="phone">Telefono (opzionale)</label>
+            <input id="phone" type="tel" placeholder="+39 3XX XXX XXXX">
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Spedizione</h2>
+        <div class="row">
+          <div>
+            <label for="name">Nome e Cognome</label>
+            <input id="name" type="text" placeholder="Mario Rossi" required>
+          </div>
+          <div>
+            <label for="cf">Codice Fiscale (per fattura)</label>
+            <input id="cf" type="text" placeholder="RSSMRA80A01H501Z">
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="address">Indirizzo</label>
+            <input id="address" type="text" placeholder="Via Roma 1" required>
+          </div>
+          <div>
+            <label for="zip">CAP</label>
+            <input id="zip" type="text" placeholder="00100" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="city">Città</label>
+            <input id="city" type="text" placeholder="Roma" required>
+          </div>
+          <div>
+            <label for="province">Provincia</label>
+            <input id="province" type="text" placeholder="RM" required maxlength="2">
+          </div>
+        </div>
+        <div>
+          <label for="country">Paese</label>
+          <select id="country">
+            <option>Italia</option>
+            <option>San Marino</option>
+            <option>Città del Vaticano</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Metodo di spedizione</h2>
+        <div class="inline">
+          <label class="radio" style="flex:1">
+            <input type="radio" name="shipping" value="standard" checked>
+            <div style="flex:1; display:flex; justify-content:space-between; width:100%">
+              <span>Standard (2–4 gg)</span><strong>€4,99</strong>
+            </div>
+          </label>
+          <label class="radio" style="flex:1">
+            <input type="radio" name="shipping" value="express">
+            <div style="flex:1; display:flex; justify-content:space-between; width:100%">
+              <span>Express (1–2 gg)</span><strong>€9,99</strong>
+            </div>
+          </label>
+        </div>
+        <div class="notice" id="freeShipNote" style="display:none">Congratulazioni: spedizione **gratis** con ordini ≥ €120.</div>
+      </div>
+
+      <div class="section">
+        <h2>Pagamento</h2>
+        <div class="row">
+          <div>
+            <label for="card">Numero carta</label>
+            <input id="card" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
+          </div>
+          <div>
+            <label for="cardName">Intestatario</label>
+            <input id="cardName" type="text" placeholder="Mario Rossi" required>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="exp">Scadenza (MM/AA)</label>
+            <input id="exp" inputmode="numeric" placeholder="12/27" required>
+          </div>
+          <div>
+            <label for="cvc">CVC</label>
+            <input id="cvc" inputmode="numeric" placeholder="123" required>
+          </div>
+        </div>
+        <div class="muted">I dati di pagamento sono di test / placeholder. Integra il tuo PSP per la produzione.</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="payBtn">Completa l’ordine</button>
+      </div>
+      <div id="formMsg" class="muted" style="margin-top:8px"></div>
+    </div>
+
+    <!-- COLONNA DESTRA: RIEPILOGO -->
+    <aside class="card">
+      <h2>Riepilogo ordine</h2>
+
+      <div class="product">
+        <img id="p-image" src="https://via.placeholder.com/300x300?text=Adidas+Samba" alt="Adidas Samba">
+        <div style="flex:1">
+          <div style="display:flex; justify-content:space-between; gap:10px">
+            <strong id="p-name">Adidas Samba</strong>
+            <span id="p-price">€99,99</span>
+          </div>
+          <div class="muted">
+            Taglia <span id="p-size">41</span> · Quantità
+            <select id="qty" style="width:auto; display:inline-block; margin-left:6px">
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+            </select>
+          </div>
+          <div class="code">
+            <input id="coupon" placeholder="Codice sconto" aria-label="Codice sconto">
+            <button class="btn secondary" id="applyCoupon" style="width:auto">Applica</button>
+          </div>
+          <div class="muted" id="couponMsg"></div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-item"><span>Subtotale (IVA escl.)</span><span id="subtotalEx">–</span></div>
+        <div class="summary-item"><span>IVA 22%</span><span id="vat">–</span></div>
+        <div class="summary-item"><span>Sconto</span><span id="discount">€0,00</span></div>
+        <div class="summary-item"><span>Spedizione</span><span id="shipping">€4,99</span></div>
+        <div class="total">
+          <div class="total-item"><span>Totale</span><span id="total">–</span></div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="muted">Foto: placeholder Adidas Samba. Puoi sostituire con asset reali quando pronti.</div>
+      <span class="tag">Reso 30 giorni</span>
+      <span class="tag">Sped. tracciata</span>
+      <span class="tag">Pagamento sicuro</span>
+    </aside>
+  </div>
+
+<script>
+(() => {
+  // --- Utility ---
+  const € = (n) => n.toLocaleString('it-IT', { style:'currency', currency:'EUR' });
+  const q = (s) => document.querySelector(s);
+  const qa = (s)=> [...document.querySelectorAll(s)];
+
+  // --- Dati prodotto (fallback + localStorage) ---
+  const fallback = {
+    name: 'Adidas Samba',
+    priceIncl: 99.99,    // prezzo IVA inclusa per unità
+    size: '41',
+    image: 'https://via.placeholder.com/600x600?text=Adidas+Samba'
+  };
+
+  let cart = null;
+  try { cart = JSON.parse(localStorage.getItem('cart')) } catch(e){ cart=null }
+  const item = cart?.items?.[0] ?? fallback;
+
+  // Populate UI
+  q('#p-name').textContent = item.name ?? fallback.name;
+  q('#p-price').textContent = €(item.priceIncl ?? fallback.priceIncl);
+  q('#p-size').textContent = item.size ?? fallback.size;
+  q('#p-image').src = item.image ?? fallback.image;
+
+  // --- Stato checkout ---
+  let qty = 1;
+  let coupon = null; // {code, type, value}
+  let shipping = 'standard';
+
+  // Soglia spedizione gratuita dopo sconto
+  const FREE_SHIP_THRESHOLD = 120;
+
+  // --- Calcolo prezzi ---
+  function compute() {
+    const unitIncl = Number(item.priceIncl ?? fallback.priceIncl);
+    const unitEx = unitIncl / 1.22; // base imponibile (IVA 22%)
+    let subtotalEx = unitEx * qty;
+
+    // Sconto: SAMBA10 = 10% sul subtotale (IVA escl.)
+    let discountEx = 0;
+    if (coupon?.code === 'SAMBA10') {
+      discountEx = subtotalEx * 0.10;
+    }
+
+    // dopo sconto
+    const subtotalExAfter = Math.max(0, subtotalEx - discountEx);
+    const vat = subtotalExAfter * 0.22;
+
+    // Spedizione
+    const shipRadio = document.querySelector('input[name="shipping"]:checked')?.value || shipping;
+    shipping = shipRadio;
+    let shipCost = shipping === 'express' ? 9.99 : 4.99;
+
+    // Spedizione gratuita se totale prodotti (IVA incl. dopo sconto) ≥ soglia
+    const productsInclAfter = subtotalExAfter + vat;
+    if (productsInclAfter >= FREE_SHIP_THRESHOLD) {
+      shipCost = 0;
+      q('#freeShipNote').style.display = 'block';
+    } else {
+      q('#freeShipNote').style.display = 'none';
+    }
+
+    const total = productsInclAfter + shipCost;
+
+    // Render
+    q('#subtotalEx').textContent = €(subtotalExAfter);
+    q('#vat').textContent = €(vat);
+    q('#discount').textContent = discountEx > 0 ? '– ' + €(discountEx) : '€0,00';
+    q('#shipping').textContent = €(shipCost);
+    q('#total').textContent = €(total);
+  }
+
+  // --- Eventi UI ---
+  q('#qty').addEventListener('change', (e)=> { qty = Number(e.target.value); compute(); });
+
+  qa('input[name="shipping"]').forEach(r => {
+    r.addEventListener('change', compute);
+  });
+
+  q('#applyCoupon').addEventListener('click', ()=>{
+    const code = q('#coupon').value.trim().toUpperCase();
+    if (!code) { q('#couponMsg').textContent = 'Inserisci un codice.'; return; }
+    if (code === 'SAMBA10') {
+      coupon = { code:'SAMBA10', type:'percent', value:10 };
+      q('#couponMsg').textContent = 'Codice applicato: –10% sui prodotti.';
+    } else {
+      coupon = null;
+      q('#couponMsg').textContent = 'Codice non valido.';
+    }
+    compute();
+  });
+
+  q('#payBtn').addEventListener('click', ()=>{
+    const required = ['#email','#name','#address','#zip','#city','#province','#card','#cardName','#exp','#cvc'];
+    const missing = required.filter(sel => !q(sel).value.trim());
+    if (missing.length) {
+      q('#formMsg').textContent = 'Compila tutti i campi obbligatori.';
+      q('#formMsg').style.color = 'crimson';
+      return;
+    }
+    // Dummy success
+    q('#formMsg').textContent = 'Ordine confermato! (demo) – integra il tuo PSP per il pagamento reale.';
+    q('#formMsg').style.color = 'green';
+
+    // Puoi salvare un ordine demo
+    const order = {
+      item: { name: item.name, size: q('#p-size').textContent, priceIncl: item.priceIncl, qty },
+      totals: {
+        subtotalEx: q('#subtotalEx').textContent,
+        vat: q('#vat').textContent,
+        shipping: q('#shipping').textContent,
+        discount: q('#discount').textContent,
+        total: q('#total').textContent
+      },
+      customer: {
+        email: q('#email').value, name: q('#name').value, address: q('#address').value,
+        zip: q('#zip').value, city: q('#city').value, province: q('#province').value, country: q('#country').value
+      },
+      shippingMethod: document.querySelector('input[name="shipping"]:checked')?.value
+    };
+    localStorage.setItem('lastOrder', JSON.stringify(order));
+  });
+
+  // Primo render
+  compute();
+})();
+</script>
+</body>
+</html>

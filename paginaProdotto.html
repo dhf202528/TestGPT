@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adidas Samba – Sneakers Iconiche</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+        }
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        .product-images img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnails img:hover {
+            border-color: #000;
+        }
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+        }
+        .product-details h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+            margin: 15px 0;
+        }
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .sizes {
+            margin-bottom: 20px;
+        }
+        .sizes label {
+            font-weight: bold;
+        }
+        select {
+            padding: 8px;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+        .add-to-cart {
+            background-color: #000;
+            color: white;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        .add-to-cart:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Immagini Prodotto -->
+    <div class="product-images">
+        <img id="main-image" src="https://via.placeholder.com/600x600?text=Adidas+Samba" alt="Adidas Samba">
+        <div class="thumbnails">
+            <img src="https://via.placeholder.com/100x100?text=Foto+1" onclick="changeImage(this)">
+            <img src="https://via.placeholder.com/100x100?text=Foto+2" onclick="changeImage(this)">
+            <img src="https://via.placeholder.com/100x100?text=Foto+3" onclick="changeImage(this)">
+        </div>
+    </div>
+
+    <!-- Dettagli Prodotto -->
+    <div class="product-details">
+        <h1>Adidas Samba</h1>
+        <p class="price">€99,99</p>
+        <p class="description">
+            Le <strong>Adidas Samba</strong> sono un’icona intramontabile delle sneakers.  
+            Nate come scarpe da calcio indoor negli anni ‘50, oggi sono sinonimo di stile casual e streetwear.  
+            Realizzate con tomaia in pelle premium, dettagli in suede e la classica suola in gomma,  
+            offrono comfort e resistenza per ogni occasione.
+        </p>
+
+        <div class="sizes">
+            <label for="size">Taglia:</label>
+            <select id="size">
+                <option>Seleziona una taglia</option>
+                <option>39</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+                <option>43</option>
+                <option>44</option>
+            </select>
+        </div>
+
+        <button class="add-to-cart">Aggiungi al Carrello</button>
+    </div>
+</div>
+
+<script>
+    function changeImage(el) {
+        document.getElementById('main-image').src = el.src.replace('100x100', '600x600');
+    }
+</script>
+
+</body>
+</html>
